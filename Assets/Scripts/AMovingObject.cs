@@ -59,7 +59,7 @@ public abstract class AMovingObject : MonoBehaviour
         RaycastHit2D hit;
         bool canMove = Move(xDir, yDir, out hit);
 
-        if (hit == null) return;
+        if (hit.transform == null) return;
 
         T hitComponent = hit.transform.GetComponent<T>();
 

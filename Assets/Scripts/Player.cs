@@ -57,6 +57,11 @@ public class Player : AMovingObject
         base.AttemptMove<T>(xDir, yDir);
         RaycastHit2D hit;
 
+        if (Move(xDir, yDir,out hit))
+        {
+
+        }
+
         CheckIfGameOver();
         GameManager.instance.isPlayerTurn = false;
     }

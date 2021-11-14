@@ -42,7 +42,7 @@ public abstract class AMovingObject : MonoBehaviour
         isMoving = true;
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
-        while (sqrRemainingDistance > Mathf.Epsilon)
+        while (sqrRemainingDistance > float.Epsilon)
         {
             Vector3 newPos = Vector3.MoveTowards(rigidbody.position,end,inverseMoveTime * Time.deltaTime);
             rigidbody.MovePosition(newPos);

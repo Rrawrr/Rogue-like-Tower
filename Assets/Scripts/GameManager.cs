@@ -29,10 +29,10 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private List<Enemy> enemies;
     private bool isEnemiesMoving;
-    private bool isDoingSetup;
 
-    [SerializeField] private GameObject levelImage;
-    [SerializeField] private Text levelText;
+    private Text levelText;
+    private GameObject levelImage;
+    private bool isDoingSetup;
 
     private void OnEnable()
     {
@@ -73,6 +73,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("INIT GAME");
 
         isDoingSetup = true;
+        levelImage = GameObject.Find("LevelImage");
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
         levelText.text = $"Day {level}";
         levelImage.SetActive(true);
 

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -37,7 +39,6 @@ public class Player : AMovingObject
         GameManager.instance.playerFoodPoints = food;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!GameManager.instance.isPlayerTurn) return;
@@ -107,7 +108,7 @@ public class Player : AMovingObject
     {
         if (other.tag == "Exit")
         {
-            Invoke("Restart", restrtLevelDelay);
+            StartCoroutine(RestartCoroutine());
             enabled = false;
         }
         else if (other.tag == "Food")
@@ -133,8 +134,9 @@ public class Player : AMovingObject
         animator.SetTrigger("playerChop");
     }
 
-    private void Restart()
+    IEnumerator RestartCoroutine()
     {
+        yield return new WaitForSeconds(restrtLevelDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

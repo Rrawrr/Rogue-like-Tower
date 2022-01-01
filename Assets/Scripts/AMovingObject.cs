@@ -20,7 +20,7 @@ public abstract class AMovingObject : MonoBehaviour
         inverseMoveTime = 1f / moveTime;
     }
 
-    protected virtual void AttemptMove<T>(int xDir, int yDir) where T : Component //Try to move
+    protected virtual void AttemptMove<T>(int xDir, int yDir) where T : Component
     {
         RaycastHit2D hit;
         canMove = Move(xDir, yDir, out hit);

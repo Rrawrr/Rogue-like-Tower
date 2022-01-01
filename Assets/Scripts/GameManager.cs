@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public int playerFoodPoints = 100;
 
     [HideInInspector] public bool isPlayerTurn = true;
-    private int level;
+    private int level = 1;
     private List<Enemy> enemies;
     private bool isEnemiesMoving;
 
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardManager = GetComponent<BoardManager>();
+        InitGame();
     }
 
     private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)

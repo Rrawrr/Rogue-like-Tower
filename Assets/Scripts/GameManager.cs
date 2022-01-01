@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     private void InitGame()
     {
+        Debug.Log("INIT GAME");
+
         isDoingSetup = true;
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();

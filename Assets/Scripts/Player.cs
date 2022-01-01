@@ -89,15 +89,14 @@ public class Player : AMovingObject
 
     protected override void AttemptMove<T>(int xDir, int yDir)
     {
-        food--;
-        foodText.text = $"Food: {food}";
-
         base.AttemptMove<T>(xDir, yDir);
 
         RaycastHit2D hit;
-        if (Move(xDir, yDir,out hit))
+        if (canMove)
         {
             SoundManager.instance.RandomizeSfx(moveSound1,moveSound2);
+            food--;
+            foodText.text = $"Food: {food}";
         }
 
         CheckIfGameOver();

@@ -11,11 +11,28 @@ public abstract class AMovingObject : MonoBehaviour
     private float inverseMoveTime;
     private bool isMoving;
 
+    protected bool canMove;
+
     protected virtual void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         rigidbody = GetComponent<Rigidbody2D>();
         inverseMoveTime = 1f / moveTime;
+    }
+
+    protected virtual void AttemptMove<T>(int xDir, int yDir) where T : Component //Try to move
+    {
+        RaycastHit2D hit;
+        canMove = Move(xDir, yDir, out hit);
+
+        if (hit.transform == null) return;
+
+        T hitComponent = hit.transform.GetComponent<T>();
+
+        if (!canMove && hitComponent != null)
+        {
+            OnCantMove(hitComponent);
+        }
     }
 
     protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
@@ -36,6 +53,8 @@ public abstract class AMovingObject : MonoBehaviour
         return false;
     }
 
+    protected abstract void OnCantMove<T>(T component) where T : Component;
+
     protected IEnumerator SmoothMovementCoroutine(Vector3 end)
     {
         isMoving = true;
@@ -52,22 +71,5 @@ public abstract class AMovingObject : MonoBehaviour
         rigidbody.MovePosition(end);
         isMoving = false;
     }
-
-    protected virtual void AttemptMove<T>(int xDir, int yDir) where T : Component
-    {
-        RaycastHit2D hit;
-        bool canMove = Move(xDir, yDir, out hit);
-
-        if (hit.transform == null) return;
-
-        T hitComponent = hit.transform.GetComponent<T>();
-
-        if (!canMove && hitComponent != null)
-        {
-            OnCantMove(hitComponent);
-        }
-    }
-
-    protected abstract void OnCantMove <T> (T component) where T : Component;
 
 }

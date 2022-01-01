@@ -63,14 +63,17 @@ public class GameManager : MonoBehaviour
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
         levelText.text = $"Day {level}";
         levelImage.SetActive(true);
-        Invoke("HideLevelImage", levelStartDelay);
+
+        StartCoroutine(HideLevelImageCoroutine());
 
         enemies.Clear();
         boardManager.SetupScene(level);
     }
 
-    private void HideLevelImage()
+    IEnumerator HideLevelImageCoroutine()
     {
+        yield return new WaitForSeconds(levelStartDelay);
+
         levelImage.SetActive(false);
         isDoingSetup = false;
     }

@@ -131,6 +131,8 @@ public class Player : AMovingObject
     {
         Wall hitWall = component as Wall;
         hitWall.DamageWall(wallDamage);
+        food--;
+        foodText.text = $"Food: {food}";
         animator.SetTrigger("playerChop");
     }
 

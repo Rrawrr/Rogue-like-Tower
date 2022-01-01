@@ -3,13 +3,14 @@ using UnityEngine;
 
 public abstract class AMovingObject : MonoBehaviour
 {
+    [HideInInspector] public bool isMoving;
     public float moveTime = 0.05f;
     public LayerMask blockingLayer;
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rigidbody;
     private float inverseMoveTime;
-    private bool isMoving;
+
 
     protected bool canMove;
 

@@ -100,13 +100,6 @@ public class GameManager : MonoBehaviour
         enabled = false;
     }
 
-    //private void Update()
-    //{
-    //    if (isPlayerTurn || isEnemiesMoving || isDoingSetup) return;
-
-    //    StartCoroutine(MoveEnemiesCoroutine());
-    //}
-
     public void AddEnemyToList(Enemy script)
     {
         enemies.Add(script);
@@ -127,6 +120,12 @@ public class GameManager : MonoBehaviour
         {
             enemies[i].MoveEnemy();
             yield return new WaitForSeconds(enemies[i].moveTime);
+
+            while (enemies[i].isMoving)
+            {
+                yield return null;
+            }
+
         }
 
         isEnemiesMoving = false;

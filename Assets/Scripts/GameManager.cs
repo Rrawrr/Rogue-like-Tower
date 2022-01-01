@@ -12,7 +12,20 @@ public class GameManager : MonoBehaviour
     public float turnDelay = 0.1f;
     public int playerFoodPoints = 100;
 
-    [HideInInspector] public bool isPlayerTurn = true;
+    private bool _isPlayerTurn;
+    public  bool isPlayerTurn
+    {
+        get => _isPlayerTurn;
+        set
+        {
+            _isPlayerTurn = value;
+            if (!_isPlayerTurn && !isEnemiesMoving && !isDoingSetup)
+            {
+                StartCoroutine(MoveEnemiesCoroutine());
+            }
+        }
+    }
+
     private int level = 1;
     private List<Enemy> enemies;
     private bool isEnemiesMoving;
@@ -45,18 +58,17 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardManager = GetComponent<BoardManager>();
-        InitGame();
+
+        StartCoroutine(InitGameCoroutine());
     }
 
     private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
     {
         level++;
-        InitGame();
+        StartCoroutine(InitGameCoroutine());
     }
 
-
-
-    private void InitGame()
+    IEnumerator InitGameCoroutine()
     {
         Debug.Log("INIT GAME");
 
@@ -66,16 +78,17 @@ public class GameManager : MonoBehaviour
         levelText.text = $"Day {level}";
         levelImage.SetActive(true);
 
-        StartCoroutine(HideLevelImageCoroutine());
-
-        enemies.Clear();
-        boardManager.SetupScene(level);
-    }
-
-    IEnumerator HideLevelImageCoroutine()
-    {
         yield return new WaitForSeconds(levelStartDelay);
 
+        HideLevelImage();
+        enemies.Clear();
+        boardManager.SetupScene(level);
+
+        isPlayerTurn = true;
+    }
+
+    void HideLevelImage()
+    {
         levelImage.SetActive(false);
         isDoingSetup = false;
     }
@@ -87,12 +100,12 @@ public class GameManager : MonoBehaviour
         enabled = false;
     }
 
-    private void Update()
-    {
-        if (isPlayerTurn || isEnemiesMoving || isDoingSetup) return;
+    //private void Update()
+    //{
+    //    if (isPlayerTurn || isEnemiesMoving || isDoingSetup) return;
 
-        StartCoroutine(MoveEnemiesCoroutine());
-    }
+    //    StartCoroutine(MoveEnemiesCoroutine());
+    //}
 
     public void AddEnemyToList(Enemy script)
     {
@@ -101,6 +114,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator MoveEnemiesCoroutine()
     {
+        Debug.Log("MoveEnemiesCoroutine");
         isEnemiesMoving = true;
         yield return new WaitForSeconds(turnDelay);
 
@@ -115,8 +129,8 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(enemies[i].moveTime);
         }
 
-        isPlayerTurn = true;
         isEnemiesMoving = false;
+        isPlayerTurn = true;
     }
     
 }

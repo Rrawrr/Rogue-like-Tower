@@ -8,6 +8,7 @@ public class Loader : MonoBehaviour
     {
         if (GameManager.instance == null)
         {
+            Debug.Log("Instantiating GameManager");
             Instantiate(gameManager);
         }
     }

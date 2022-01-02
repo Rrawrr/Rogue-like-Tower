@@ -12,6 +12,6 @@ public class Loader : MonoBehaviour
             Instantiate(gameManager);
         }
 
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 60;
     }
 }

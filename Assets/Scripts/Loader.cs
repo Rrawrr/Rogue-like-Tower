@@ -11,5 +11,7 @@ public class Loader : MonoBehaviour
             Debug.Log("Instantiating GameManager");
             Instantiate(gameManager);
         }
+
+        Application.targetFrameRate = 120;
     }
 }

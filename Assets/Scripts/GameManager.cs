@@ -32,17 +32,6 @@ public class GameManager : MonoBehaviour
 
     private Text levelText;
     private GameObject levelImage;
-    private bool isDoingSetup;
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnLevelFinishLoading;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnLevelFinishLoading;
-    }
 
     void Awake()
     {
@@ -58,18 +47,30 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         enemies = new List<Enemy>();
         boardManager = GetComponent<BoardManager>();
+    }
 
+    private void OnEnable()
+    {
         StartCoroutine(InitGameCoroutine());
+        SceneManager.sceneLoaded += OnLevelFinishLoading;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishLoading;
     }
 
     private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("OnLevelFinishLoading");
         level++;
         StartCoroutine(InitGameCoroutine());
     }
 
     IEnumerator InitGameCoroutine()
     {
+        if(isDoingSetup) yield break;
+
         Debug.Log("INIT GAME");
 
         isDoingSetup = true;
@@ -107,7 +108,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator MoveEnemiesCoroutine()
     {
-        Debug.Log("MoveEnemiesCoroutine");
+        //Debug.Log("MoveEnemiesCoroutine");
         isEnemiesMoving = true;
         yield return new WaitForSeconds(turnDelay);
 

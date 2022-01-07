@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public float levelStartDelay = 2f;
     public float turnDelay = 0.1f;
     public int playerFoodPoints = 100;
+    public bool isDoingSetup;
 
     private bool _isPlayerTurn;
     public  bool isPlayerTurn
@@ -85,13 +86,13 @@ public class GameManager : MonoBehaviour
         enemies.Clear();
         boardManager.SetupScene(level);
 
+        isDoingSetup = false;
         isPlayerTurn = true;
     }
 
     void HideLevelImage()
     {
         levelImage.SetActive(false);
-        isDoingSetup = false;
     }
 
     public void GameOver()

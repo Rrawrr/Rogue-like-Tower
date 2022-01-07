@@ -41,7 +41,7 @@ public class Player : AMovingObject
 
     void Update()
     {
-        if (!GameManager.instance.isPlayerTurn) return;
+        if (!GameManager.instance.isPlayerTurn || GameManager.instance.isDoingSetup) return;
 
         int horizontal = 0;
         int vertical = 0;

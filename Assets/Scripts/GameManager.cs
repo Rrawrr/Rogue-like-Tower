@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        levelText.text = $"After {level} days, you starved.";
+        levelText.text = $"After {level} days, you starved.\n Try again?";
         levelImage.SetActive(true);
         overlayButton.SetInteractable(true);
         level = 0;

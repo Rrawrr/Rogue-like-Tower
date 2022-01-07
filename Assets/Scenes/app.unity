@@ -992,7 +992,7 @@ MonoBehaviour:
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
-    m_LineSpacing: 1
+    m_LineSpacing: 2
   m_Text: Day 1
 --- !u!222 &1797980511
 CanvasRenderer:

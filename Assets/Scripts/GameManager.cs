@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public BoardManager boardManager;
+    public OverlayButton overlayButton;
+    public float nextLevelDelay = 1f;
     public float levelStartDelay = 2f;
     public float turnDelay = 0.1f;
     public int playerFoodPoints = 100;
@@ -65,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("OnLevelFinishLoading");
         level++;
+        SoundManager.instance.PlayMusic();
         StartCoroutine(InitGameCoroutine());
     }
 
@@ -77,6 +80,8 @@ public class GameManager : MonoBehaviour
         isDoingSetup = true;
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        overlayButton = levelImage.GetComponentInParent<OverlayButton>();
+        overlayButton.SetInteractable(false);
         levelText.text = $"Day {level}";
         levelImage.SetActive(true);
 
@@ -99,7 +104,21 @@ public class GameManager : MonoBehaviour
     {
         levelText.text = $"After {level} days, you starved.";
         levelImage.SetActive(true);
-        enabled = false;
+        overlayButton.SetInteractable(true);
+        level = 0;
+        playerFoodPoints = 100;
+        //enabled = false;
+    }
+
+    public void LoadNextLevel()
+    {
+        StartCoroutine(RestartGameCoroutine());
+    }
+
+    IEnumerator RestartGameCoroutine()
+    {
+        yield return new WaitForSeconds(nextLevelDelay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void AddEnemyToList(Enemy script)

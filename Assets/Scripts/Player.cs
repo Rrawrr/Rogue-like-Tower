@@ -9,7 +9,6 @@ public class Player : AMovingObject
     public int wallDamage = 1;
     public int poitnsPerFood = 10;
     public int pointsPerSoda = 20;
-    public float restrtLevelDelay = 1f;
     public Text foodText;
 
     public AudioClip moveSound1;
@@ -108,7 +107,7 @@ public class Player : AMovingObject
     {
         if (other.tag == "Exit")
         {
-            StartCoroutine(RestartCoroutine());
+            GameManager.instance.LoadNextLevel();
             enabled = false;
         }
         else if (other.tag == "Food")
@@ -136,11 +135,7 @@ public class Player : AMovingObject
         animator.SetTrigger("playerChop");
     }
 
-    IEnumerator RestartCoroutine()
-    {
-        yield return new WaitForSeconds(restrtLevelDelay);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+    
 
     public void LoseFood(int loss)
     {
@@ -154,6 +149,7 @@ public class Player : AMovingObject
     {
         if (food <= 0)
         {
+            enabled = false;
             SoundManager.instance.PlaySingle(gameOverSound);
             SoundManager.instance.musicAudioSource.Stop();
             GameManager.instance.GameOver();

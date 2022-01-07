@@ -24,6 +24,14 @@ public class SoundManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void PlayMusic()
+    {
+        if (!musicAudioSource.isPlaying)
+        {
+            musicAudioSource.Play();
+        }
+    }
+
     public void PlaySingle(AudioClip ac)
     {
         sfxAudioSource.clip = ac;

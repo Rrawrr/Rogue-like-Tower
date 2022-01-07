@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private int level = 1;
+    private int level = 0;
     private List<Enemy> enemies;
     private bool isEnemiesMoving;
 
@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(InitGameCoroutine());
         SceneManager.sceneLoaded += OnLevelFinishLoading;
     }
 
@@ -66,18 +65,16 @@ public class GameManager : MonoBehaviour
     private void OnLevelFinishLoading(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("OnLevelFinishLoading");
-        level++;
-        SoundManager.instance.PlayMusic();
         StartCoroutine(InitGameCoroutine());
     }
 
     IEnumerator InitGameCoroutine()
     {
-        if(isDoingSetup) yield break;
-
         Debug.Log("INIT GAME");
 
         isDoingSetup = true;
+        level++;
+        SoundManager.instance.PlayMusic();
         levelImage = GameObject.Find("LevelImage");
         levelText = GameObject.Find("LevelText").GetComponent<Text>();
         overlayButton = levelImage.GetComponentInParent<OverlayButton>();
@@ -107,15 +104,14 @@ public class GameManager : MonoBehaviour
         overlayButton.SetInteractable(true);
         level = 0;
         playerFoodPoints = 100;
-        //enabled = false;
     }
 
     public void LoadNextLevel()
     {
-        StartCoroutine(RestartGameCoroutine());
+        StartCoroutine(LoadLevelCoroutine());
     }
 
-    IEnumerator RestartGameCoroutine()
+    IEnumerator LoadLevelCoroutine()
     {
         yield return new WaitForSeconds(nextLevelDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

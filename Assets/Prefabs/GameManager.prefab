@@ -54,14 +54,14 @@ MonoBehaviour:
     maximum: 5
   exit: {fileID: 9102469609032030277, guid: 07b3f92f913eaea4d8b94b2b7c18a297, type: 3}
   floorTiles:
-  - {fileID: 8448002829238820135, guid: 5e1f879de46498b479964d58c7feddfa, type: 3}
-  - {fileID: 8448002829238820135, guid: caebf09e60933d0478f40c4e8317eaa5, type: 3}
-  - {fileID: 8448002829238820135, guid: b5843ae7f74143442b6fac9870409398, type: 3}
-  - {fileID: 8448002829238820135, guid: aa491a87b76c721479fd18774e08bfbf, type: 3}
-  - {fileID: 8448002829238820135, guid: 9d52700796f45204c8acfbff6418b912, type: 3}
-  - {fileID: 8448002829238820135, guid: 571ed0f69d59701449c4780b1866c31f, type: 3}
-  - {fileID: 8448002829238820135, guid: 85512f2d8154a12409fae99b4dc3a217, type: 3}
-  - {fileID: 8448002829238820135, guid: 8b52065e29582d84b8fa90aefe6a79f3, type: 3}
+  - {fileID: 11400000, guid: c103238a726a580469408d5a1c483f98, type: 2}
+  - {fileID: 11400000, guid: 2a620587d0a0f4248ba27308aee4d6e2, type: 2}
+  - {fileID: 11400000, guid: 30986d9ae4a87ba45be604c77af29533, type: 2}
+  - {fileID: 11400000, guid: e32345f7173ae8d40a38d599f6f9f295, type: 2}
+  - {fileID: 11400000, guid: 484f28ca52123aa4b9f81d58a4a5f341, type: 2}
+  - {fileID: 11400000, guid: fe138146b88f45b438dd5b3913ac3613, type: 2}
+  - {fileID: 11400000, guid: b45d81b04a1b33740bf508472746bfac, type: 2}
+  - {fileID: 11400000, guid: 2a6757ca4592e8741924b69ba89d8d29, type: 2}
   wallTiles:
   - {fileID: 8258876195724296526, guid: 04f4a22d2c7bec3469a8259a8b650e40, type: 3}
   - {fileID: 8258876195724296526, guid: d2068e239690de04e8a31698df711d0e, type: 3}
@@ -78,9 +78,10 @@ MonoBehaviour:
   - {fileID: 6952663151178872656, guid: 941431e9b0810974885e378f447f08f1, type: 3}
   - {fileID: 4478561560562902069, guid: 0d0957eb177b9504aaf05f1a2643f619, type: 3}
   outerWallTiles:
-  - {fileID: 8559354719274184019, guid: b7cc6caf9685fcb40ab8c0b780b22987, type: 3}
-  - {fileID: 8559354719274184019, guid: c59a67ab4838d924ea9f6ebb19f3c071, type: 3}
-  - {fileID: 8559354719274184019, guid: 912373188d0fcbb4aa55d0b114be349e, type: 3}
+  - {fileID: 11400000, guid: efd42e5bed0b7294fbba76c714c5a39d, type: 2}
+  - {fileID: 11400000, guid: 02681c65c94f8a9458dc5b440ef7eae0, type: 2}
+  - {fileID: 11400000, guid: 5cc73a36217e3184d94c1472d7065cda, type: 2}
+  tileMap: {fileID: 0}
 --- !u!114 &3710199581688877724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +95,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardManager: {fileID: 3710199581688877725}
+  overlayButton: {fileID: 0}
+  nextLevelDelay: 1
   levelStartDelay: 2
   turnDelay: 0.1
   playerFoodPoints: 100
+  isDoingSetup: 0

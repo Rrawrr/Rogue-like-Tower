@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public float levelStartDelay = 2f;
     public float turnDelay = 0.1f;
     public int playerFoodPoints = 100;
-    public bool isDoingSetup;
+    [HideInInspector] public bool isDoingSetup;
 
     private bool _isPlayerTurn;
     public  bool isPlayerTurn

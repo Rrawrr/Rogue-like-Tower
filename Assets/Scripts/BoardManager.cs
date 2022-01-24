@@ -27,15 +27,15 @@ public class BoardManager : MonoBehaviour
     public Count wallCount = new Count(5, 9);
     public Count foodCount = new Count(1, 5);
 
-    public GameObject exit;
     public Tile[] floorTiles;
-    public GameObject[] wallTiles;
-    public GameObject[] foodTiles;
-    public GameObject[] enemyTiles;
     public Tile[] outerWallTiles;
+    public GameObject exit;
+    public GameObject[] innerWalls;
+    public GameObject[] food;
+    public GameObject[] enemies;
 
-    [SerializeField] private Tilemap tileMap;
-    //[SerializeField] private Tile groundTile;
+    public Tilemap floorTilemap;
+    public Tilemap outerWallsTilemap;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -61,17 +61,18 @@ public class BoardManager : MonoBehaviour
         {
             for (int y = -1; y < rows + 1; y++)
             {
-                var toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
-
                 if (x == -1 || x == columns || y == -1 || y == rows)
                 {
-                    toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    var toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+                    outerWallsTilemap.SetTile(new Vector3Int(x, y, 0), toInstantiate);
                 }
-
-                //GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
-                //instance.transform.SetParent(boardHolder);
-                tileMap.SetTile(new Vector3Int(x,y,0),toInstantiate);
-
+                else
+                {
+                    //GameObject instance = Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    //instance.transform.SetParent(boardHolder);
+                    var toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)]; 
+                    floorTilemap.SetTile(new Vector3Int(x,y,0),toInstantiate);
+                }
             }
         }
     }
@@ -100,10 +101,10 @@ public class BoardManager : MonoBehaviour
     {
         BoardSetup();
         InitializeList();
-        LayoutAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
-        LayoutAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
+        LayoutAtRandom(innerWalls, wallCount.minimum, wallCount.maximum);
+        LayoutAtRandom(food, foodCount.minimum, foodCount.maximum);
         int enemyCount = (int)Mathf.Log(level, 2f);
-        LayoutAtRandom(enemyTiles, enemyCount, enemyCount);
+        LayoutAtRandom(enemies, enemyCount, enemyCount);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
     }
 

@@ -52,7 +52,6 @@ MonoBehaviour:
   foodCount:
     minimum: 1
     maximum: 5
-  exit: {fileID: 9102469609032030277, guid: 07b3f92f913eaea4d8b94b2b7c18a297, type: 3}
   floorTiles:
   - {fileID: 11400000, guid: c103238a726a580469408d5a1c483f98, type: 2}
   - {fileID: 11400000, guid: 2a620587d0a0f4248ba27308aee4d6e2, type: 2}
@@ -62,7 +61,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe138146b88f45b438dd5b3913ac3613, type: 2}
   - {fileID: 11400000, guid: b45d81b04a1b33740bf508472746bfac, type: 2}
   - {fileID: 11400000, guid: 2a6757ca4592e8741924b69ba89d8d29, type: 2}
-  wallTiles:
+  outerWallTiles:
+  - {fileID: 11400000, guid: efd42e5bed0b7294fbba76c714c5a39d, type: 2}
+  - {fileID: 11400000, guid: 02681c65c94f8a9458dc5b440ef7eae0, type: 2}
+  - {fileID: 11400000, guid: 5cc73a36217e3184d94c1472d7065cda, type: 2}
+  exit: {fileID: 9102469609032030277, guid: 07b3f92f913eaea4d8b94b2b7c18a297, type: 3}
+  innerWalls:
   - {fileID: 8258876195724296526, guid: 04f4a22d2c7bec3469a8259a8b650e40, type: 3}
   - {fileID: 8258876195724296526, guid: d2068e239690de04e8a31698df711d0e, type: 3}
   - {fileID: 8258876195724296526, guid: e00007a5a8e36ba41be108d563bf5364, type: 3}
@@ -71,17 +75,14 @@ MonoBehaviour:
   - {fileID: 8258876195724296526, guid: 66a4a9bee53ef4141a3675de1f2a8465, type: 3}
   - {fileID: 8258876195724296526, guid: b94a07a6306a8d04488dd75d1a68399c, type: 3}
   - {fileID: 8258876195724296526, guid: ec88e7a52b8abc74399d094cd4f37d2d, type: 3}
-  foodTiles:
+  food:
   - {fileID: 1689555221992912719, guid: 2bb6e470308cde84282a8d90c9b247af, type: 3}
   - {fileID: 1629774218126243894, guid: 892f16ec5394b6941ac9d6d88d55d47c, type: 3}
-  enemyTiles:
+  enemies:
   - {fileID: 6952663151178872656, guid: 941431e9b0810974885e378f447f08f1, type: 3}
   - {fileID: 4478561560562902069, guid: 0d0957eb177b9504aaf05f1a2643f619, type: 3}
-  outerWallTiles:
-  - {fileID: 11400000, guid: efd42e5bed0b7294fbba76c714c5a39d, type: 2}
-  - {fileID: 11400000, guid: 02681c65c94f8a9458dc5b440ef7eae0, type: 2}
-  - {fileID: 11400000, guid: 5cc73a36217e3184d94c1472d7065cda, type: 2}
-  tileMap: {fileID: 0}
+  floorTilemap: {fileID: 0}
+  outerWallsTilemap: {fileID: 0}
 --- !u!114 &3710199581688877724
 MonoBehaviour:
   m_ObjectHideFlags: 0

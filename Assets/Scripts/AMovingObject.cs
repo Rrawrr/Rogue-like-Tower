@@ -1,4 +1,5 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public abstract class AMovingObject : MonoBehaviour
@@ -9,7 +10,7 @@ public abstract class AMovingObject : MonoBehaviour
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rigidbody;
-    private float inverseMoveTime;
+    //private float inverseMoveTime;
 
 
     protected bool canMove;
@@ -18,7 +19,7 @@ public abstract class AMovingObject : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
         rigidbody = GetComponent<Rigidbody2D>();
-        inverseMoveTime = 1f / moveTime;
+        //inverseMoveTime = 1f / moveTime;
     }
 
     protected virtual void AttemptMove<T>(int xDir, int yDir) where T : Component
@@ -47,7 +48,8 @@ public abstract class AMovingObject : MonoBehaviour
 
         if (hit.transform == null && !isMoving)
         {
-            StartCoroutine(SmoothMovementCoroutine(end));
+            //StartCoroutine(SmoothMovement(end));
+            SmoothMovement(end);
             return true;
         }
 
@@ -56,21 +58,36 @@ public abstract class AMovingObject : MonoBehaviour
 
     protected abstract void OnCantMove<T>(T component) where T : Component;
 
-    protected IEnumerator SmoothMovementCoroutine(Vector3 end)
+    //protected IEnumerator SmoothMovement(Vector3 end)
+    //{
+    //    isMoving = true;
+    //    float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+
+    //    while (sqrRemainingDistance > float.Epsilon)
+    //    {
+    //        Vector3 newPos = Vector3.MoveTowards(rigidbody.position,end,inverseMoveTime * Time.deltaTime);
+    //        rigidbody.MovePosition(newPos);
+    //        sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+    //        yield return null;
+    //    }
+
+    //    rigidbody.MovePosition(end);
+    //    isMoving = false;
+    //}
+
+    private void SmoothMovement(Vector3 end)
     {
-        isMoving = true;
-        float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+        transform.DOMove(end, moveTime, false).OnStart(OnStartMovementHandler).OnComplete(OnCompleteMovementHandler);
+    }
 
-        while (sqrRemainingDistance > float.Epsilon)
-        {
-            Vector3 newPos = Vector3.MoveTowards(rigidbody.position,end,inverseMoveTime * Time.deltaTime);
-            rigidbody.MovePosition(newPos);
-            sqrRemainingDistance = (transform.position - end).sqrMagnitude;
-            yield return null;
-        }
+    private void OnStartMovementHandler()
+    {
 
-        rigidbody.MovePosition(end);
-        isMoving = false;
+    }
+
+    private void OnCompleteMovementHandler()
+    {
+
     }
 
 }
